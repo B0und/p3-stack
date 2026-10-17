@@ -4,7 +4,26 @@ Every pstack sync and every p3-only change, newest first. `UPSTREAM` holds the p
 
 ## Unreleased
 
-Nothing yet.
+Issue #2 is fixed locally. The installer defaults to both provider paths, supports provider selection and `CLAUDE_CONFIG_DIR`, and preserves existing user-owned skills and foreign links. Skill creation and discovery use the active provider directory. Model readers check project configuration before the global fallback. Installer tests cover both providers and repeated installs.
+
+T3 child worktrees now use `delegate_task` with `isolation: "worktree"`. Separate top-level threads require an explicit user request. The skill verifier checks metadata, links, configuration fallback, and unported Cursor mechanisms.
+
+## 2026-10-17: sync pstack 0.15.20 to 0.15.25
+
+Built on [PR #8](https://github.com/uzairansaruzi/p3-stack/pull/8), preserving its earlier 0.15.10 to 0.15.20 port. Upstream range `1b6d44f..09d06eb`, pinned to the current cursor/plugins main commit.
+
+### Ported
+
+- Add `in-your-own-words` and `sharpen`. Update `ketchup` to explain changes with existing screenshots, videos, and diagrams, with replies under 150 words. Autopilot ticks use it when something changes.
+- Carry the revised attack-the-premise, root-cause, idempotence, caller-migration, behaviour-test, and type-system principles, plus the shorter review and shipping guidance.
+- Match delegate effort to the job using detected provider options. Preserve role diversity and configured verification speed.
+- Carry the autopilot merge-safety, single-verifier rules for minor revisions, and reduced orchestration guidance. Preserve T3 scheduling, PR registration, watch wake-ups, task cancellation, and isolated child worktrees.
+- Resolve bundled leaf skills and worker briefs from the installation checkout. Remove ignored frontmatter and document fresh-session discovery.
+- Adapt the intent of upstream Claude support through the dual-provider installer and provider-aware authoring paths. p3 remains a T3 package on both providers.
+
+### Not copied
+
+Cursor plugin manifests, marketplace assets, the Cursor guide, its generated Claude marketplace tree, and Cursor orchestration/watcher scripts are not shipped. T3 owns delegation and PR watching. The latest orchestration and worktree-audit script changes reinforce lifecycle and ownership rules already represented by p3 playbooks. Model-family slug substitutions are replaced by live provider discovery. The upstream README's Cursor menu and plugin commands are replaced by provider skill-directory instructions.
 
 ## 2026-10-12: sync pstack 0.15.10 → 0.15.20
 
@@ -14,7 +33,7 @@ Upstream range `4e5b1cf..1b6d44f` (cursor/plugins, `pstack/`).
 
 - Add `UPSTREAM` (the pin) and `scripts/upstream.sh` (`status`, `files`, `diff`, `pin`) for tracking pstack.
 - Add this file, the "Syncing with upstream pstack" section of `AGENTS.md`, and the "Staying current with pstack" section of the README.
-- README: clone from `Tr1Fecta-7/p3-stack`, list `ketchup`, and state that the thread receiving `/p3-mode` runs the playbook.
+- README: list `ketchup` and state that the thread receiving `/p3-mode` runs the playbook. Keep the canonical `uzairansaruzi/p3-stack` clone URL.
 
 ### Ported
 

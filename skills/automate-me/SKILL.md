@@ -6,6 +6,8 @@ disable-model-invocation: true
 
 # Automate me
 
+Use the active provider's skill directory: `.agents/skills/` for Codex, `.claude/skills/` for Claude. Search both locations when finding an existing skill and follow symlinks before editing. When both providers are installed, keep one source directory and link the other provider's entry to it. For global Claude skills, honor `CLAUDE_CONFIG_DIR`, defaulting to `~/.claude`. Set `<skill-dir>` to the chosen directory and use it for every generated path below.
+
 A guided flow for turning the user's working conventions into a skill agents will follow. The output is one `-mode` skill tailored to them (e.g. `jay-mode`, `priya-mode`).
 
 This skill orchestrates three others: an inline mining pass (see step 1), the `authoring-a-skill` playbook (authoring), and the **unslop** skill (prose discipline). It sequences them. It doesn't replace them.
@@ -28,7 +30,7 @@ Update mode changes the rest of the flow:
 
 Scope the mining to the current project before fanning out. Use `t3_thread_search` and `t3_thread_read` on this project's threads only. Don't read threads from other projects. That crosses project boundaries and reads private chats from unrelated work.
 
-Survey recent threads within that scope for recurring patterns. Run multiple parallel `delegate_task` briefs (`mode: "async"`) across slices of history (e.g. last 2-4 weeks, split into 3 slices so each has enough material). Every brief stands alone: child agents get only the brief, never the parent's context. Each brief names the project, its slice, and the signals below; says read-only, inspect only, no writes; and asks for a short structured list of patterns seen with thread pointers. Drain with `task_status`. Default signals worth hunting:
+Survey recent threads within that scope for recurring patterns. Run multiple parallel `delegate_task` briefs (`mode: "async"`) across slices of history (e.g. last 2-4 weeks, split into 3 slices so each has enough material). Every brief stands alone: child agents get only the brief, never the parent's context. Each brief names the project, its slice, and the signals below; says read-only, inspect only, no writes; and asks for a short structured list of patterns seen with thread pointers. Drain with `task_status`. Default signals worth hunting: Pick each subagent's reasoning level and speed for the job, per the Subagents section of the **p3-mode** skill.
 
 - Response preferences (length, tone, format, "dumb it down" corrections)
 - Delegation habits (subagents, models, specialized workflows, parallelism)
@@ -66,7 +68,7 @@ The **p3-mode** skill shows the shape. Read it for granularity. Don't copy its c
 
 Use the `authoring-a-skill` playbook to author the skill. Placement:
 
-- Path: preserve an existing mode skill's category. For a new mode, use `.agents/skills/<handle>/<handle>-mode/SKILL.md` when the repo has an established personal category for that handle. Otherwise default to `.agents/skills/<handle>-mode/SKILL.md` in the project (or `~/.agents/skills/<handle>-mode/` if the user prefers a personal skill).
+- Path: preserve an existing mode skill's category. For a new mode, use `.agents/skills/<handle>/<handle>-mode/SKILL.md` when the repo has an established personal category for that handle. Otherwise default to `<skill-dir>/<handle>-mode/SKILL.md` in the project (or `~/<skill-dir>/<handle>-mode/` if the user prefers a personal skill).
 - Handle: the user's first name or chosen identifier.
 - Frontmatter `description`: trigger on their name + `/<handle>-mode` + "work in their style", not on generic keywords like "write code" or "review PR".
 - Frontmatter `disable-model-invocation: true` by default. Opt out only if the user explicitly wants their mode to apply on every turn.

@@ -6,6 +6,8 @@ disable-model-invocation: true
 
 # Interrogate
 
+Read model roles from `p3-models.md` in the project root, else `~/.agents/p3-models.md`. The project file wins. Resolve available providers, models, and options with `orchestrator_capabilities`.
+
 Spawn one reviewer per configured model to adversarially review code changes. The adversarial signal comes from model diversity, not assigned personas. The deliverable is a synthesized verdict. Do NOT auto-apply changes.
 
 ## Step 1, Scope
@@ -30,7 +32,7 @@ Each brief is self-contained, since a delegated reviewer gets only the brief, ne
 
 If `delegate_task` rejects a configured entry, run that reviewer on the closest available model of the same family from `orchestrator_capabilities` and say so. Do not block the review on it.
 
-Read `references/reviewer-prompt.md` and fill in the same template for every reviewer with the stated intent, the diff or file contents, the rubric from `references/rubric.md`, and the code-quality lens from `references/code-quality-review.md`. Drain results with `task_status`.
+Read `references/reviewer-prompt.md` and fill in the same template for every reviewer with the stated intent, the diff or file contents, the rubric from `references/rubric.md`, and the code-quality lens from `references/code-quality-review.md`. Drain results with `task_status`. Pick each subagent's reasoning level and speed for the job, per the Subagents section of the **p3-mode** skill.
 
 ## Step 4, Synthesize
 

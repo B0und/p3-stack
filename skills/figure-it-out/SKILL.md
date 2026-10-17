@@ -6,6 +6,8 @@ disable-model-invocation: true
 
 # Figure it out
 
+Read model roles from `p3-models.md` in the project root, else `~/.agents/p3-models.md`. The project file wins. Resolve available providers, models, and options with `orchestrator_capabilities`.
+
 When the task matches no playbook, design one. The deliverable before any code is the workflow itself: a sequence of phases that scales rigor to the task, runs the scientific method, and leaves a decision trail a human can audit after stepping away.
 
 ## Start
@@ -28,8 +30,8 @@ Decompose into atomic, independently-landable units. Sequence riskiest-unknown-f
 
 - Build the verification harness before the work, with the baseline captured from the pre-change state, so the check reads as "old value vs new value".
 - For one-way-door design decisions, run the **architect** skill (it runs **arena**). Skip it for mechanical work whose shape is already concrete. A second arena over a settled design is over-engineering (the **laziness-protocol** principle skill).
-- Decide what fans out. Parallelize only across seams, and give each writer its own worktree via `t3_thread_launch` with a `workspaceStrategy`, one writer per worktree (the **separate-before-serializing-shared-state** principle skill). Don't over-fan.
-- Every `delegate_task` brief stands alone: the child gets only the brief, never your context. Read-only workers get a brief that says read-only, inspect only, no writes. Resolve models from named roles in `p3-models.md` via `orchestrator_capabilities`; never hardcode a slug.
+- Decide what fans out. Parallelize only across seams, and give each writer its own worktree via `delegate_task` with `isolation: "worktree"`, one writer per worktree (the **separate-before-serializing-shared-state** principle skill). Don't over-fan.
+- Every `delegate_task` brief stands alone: the child gets only the brief, never your context. Read-only workers get a brief that says read-only, inspect only, no writes. Resolve models from named roles in `p3-models.md` via `orchestrator_capabilities`; never hardcode a slug. Pick each subagent's reasoning level and speed for the job, per the Subagents section of the **p3-mode** skill.
 - Write the designed phase list down. That list is what the human reviews.
 
 Then execute the design. Add its steps to the todolist as concrete items between the Phase C and Phase D entries. Run each under the Phase C loop discipline, and weave the Phase D log through them, a row as each step lands, rather than saving the whole trail for the end.

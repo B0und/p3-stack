@@ -6,6 +6,8 @@ disable-model-invocation: true
 
 # Architect
 
+Read model roles from `p3-models.md` in the project root, else `~/.agents/p3-models.md`. The project file wins. Resolve available providers, models, and options with `orchestrator_capabilities`.
+
 Sketch types, function signatures, class shapes, and module boundaries with `not implemented` bodies and pseudocode. Synthesize across multiple model perspectives, then fill in code against the chosen sketch.
 
 ## Start

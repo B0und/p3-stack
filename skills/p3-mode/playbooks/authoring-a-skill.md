@@ -1,5 +1,7 @@
 ### Authoring or modifying a skill
 
+Use the active provider's skill directory: `.agents/skills/` for Codex, `.claude/skills/` for Claude. Search both locations when finding an existing skill and follow symlinks before editing. When both providers are installed, keep one source directory and link the other provider's entry to it. For global Claude skills, honor `CLAUDE_CONFIG_DIR`, defaulting to `~/.claude`.
+
 **You own the skill's voice.**
 
 1. Write `SKILL.md` with `name` and `description` frontmatter. Keep it thin, follow the repo's AGENTS.md conventions, test the description trigger, and reference other skills by path.

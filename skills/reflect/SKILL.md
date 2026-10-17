@@ -6,6 +6,8 @@ disable-model-invocation: true
 
 # Reflect
 
+Read model roles from `p3-models.md` in the project root, else `~/.agents/p3-models.md`. The project file wins. Resolve available providers, models, and options with `orchestrator_capabilities`.
+
 Mine the current conversation for durable learnings, then route them into skill edits.
 
 Invoke when the user says "reflect" or "/reflect". Skip when the conversation is trivial, off-topic, or already covered by an existing skill the parent followed correctly. One-offs are not learnings.
@@ -26,7 +28,7 @@ Resolve each model from its role line in `p3-models.md` via `orchestrator_capabi
 |---|---|---|
 | Judgment | `reflect judgment, divergent, synthesizer` | `references/judgment-reviewer.md` |
 | Tooling | `reflect tooling` | `references/tooling-reviewer.md` |
-| Divergent | `reflect judgment, divergent, synthesizer` | `references/divergent-reviewer.md` |
+| Divergent | `reflect judgment, divergent, synthesizer` | `references/divergent-reviewer.md` | Pick each subagent's reasoning level and speed for the job, per the Subagents section of the **p3-mode** skill.
 
 Pass each template verbatim as the brief, substituting the thread id or digest where marked. Drain with `task_status`; reviewers return findings in their task result.
 

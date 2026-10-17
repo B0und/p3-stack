@@ -5,7 +5,7 @@ p3-stack is [pstack](https://github.com/cursor/plugins/tree/main/pstack) rebuilt
 pstack is poteto's answer to AI slop code. It turns an agent into an engineering team: one mode skill that routes to playbooks, principles that ground every decision, and verification strict enough that you can parallelize with confidence. p3-stack keeps that system and rewires the mechanics to T3 Code's primitives:
 
 - **Delegation.** `delegate_task` child agents replace Cursor's Task tool, with per-role providers and models resolved from `orchestrator_capabilities`. Cross-model panels are native.
-- **Worktrees.** `t3_thread_launch` binds a worker to its own worktree and branch. One writer per worktree, enforced by the app instead of by advice.
+- **Worktrees.** `delegate_task` with `isolation: "worktree"` gives a child its own checkout. One writer per worktree, enforced by the app instead of by advice.
 - **Watching.** `watch_pull_request` wakes the thread when checks finish, someone comments, or the branch conflicts. No polling loops.
 - **Scheduling.** `schedule_task` runs audits and overnight cadences even when no turn is active. No `/loop`.
 - **Memory.** `t3_thread_read` and `t3_thread_search` replace mining Cursor transcript files.
@@ -14,12 +14,18 @@ pstack is poteto's answer to AI slop code. It turns an agent into an engineering
 ## Install
 
 ```bash
-git clone https://github.com/Tr1Fecta-7/p3-stack.git
+git clone https://github.com/uzairansaruzi/p3-stack.git
 cd p3-stack
 ./install.sh
 ```
 
-`install.sh` links every `skills/*` directory into `~/.agents/skills/`, where T3 Code reads skills. Use `./install.sh --project /path/to/repo` to install into a project's `.agents/skills/` instead.
+`install.sh` links skills into both `~/.agents/skills/` for Codex and `~/.claude/skills/` for Claude. Claude does not discover skills installed only under `.agents/`. For global Claude installs, `CLAUDE_CONFIG_DIR` overrides `~/.claude`.
+
+Use `./install.sh --project /path/to/repo` for project-local links under both `.agents/skills/` and `.claude/skills/`. Select one provider with `--provider codex` or `--provider claude`. Existing files, directories, and links to other sources are preserved and reported as skipped. Re-running the installer leaves correct links unchanged. Keep the checkout in place because the links point into it. Skills become available in a fresh provider session.
+
+For role configuration, readers use the project root's `p3-models.md`, then `~/.agents/p3-models.md`. This is a data file and works for both providers.
+
+Run `python3 -m unittest discover -s tests -v` to check installation and `python3 scripts/verify-skills.py` to validate skill metadata, references, and T3 portability.
 
 ## Get started
 
@@ -35,7 +41,7 @@ The thread that receives `/p3-mode` runs the playbook. It owns the todo list and
 
 ## Skills
 
-architect, arena, automate-me, benchmark-checklist, blast-radius, bro, correct, create-verification-skill, figure-it-out, how, interrogate, ketchup, maintain-verification-skill, make-bot-ui, no-comments, p3-help, recall, reflect, setup-p3, show-me-your-work, swarm, tdd, teach, technical-writing, typescript-best-practices, unslop, why.
+architect, arena, automate-me, benchmark-checklist, blast-radius, bro, correct, create-verification-skill, figure-it-out, how, interrogate, in-your-own-words, ketchup, maintain-verification-skill, make-bot-ui, no-comments, p3-help, recall, reflect, setup-p3, sharpen, show-me-your-work, swarm, tdd, teach, technical-writing, typescript-best-practices, unslop, why.
 
 ## Principles
 

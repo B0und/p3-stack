@@ -6,9 +6,11 @@ disable-model-invocation: true
 
 # Why
 
+Read model roles from `p3-models.md` in the project root, else `~/.agents/p3-models.md`. The project file wins. Resolve available providers, models, and options with `orchestrator_capabilities`.
+
 Investigate the motivation and intent behind code. The companion `how` skill answers what the code does and how it works. `why` answers what forces led to its shape.
 
-Each delegation below names a role line in `p3-models.md`. Resolve it through `orchestrator_capabilities` and pass that provider and model to `delegate_task`. Never hardcode a slug. If the line or the file is missing, use the session default and say so.
+Each delegation below names a role line in `p3-models.md`. Resolve it through `orchestrator_capabilities` and pass that provider and model to `delegate_task`. Never hardcode a slug. If the line or the file is missing, use the session default and say so. Pick each subagent's reasoning level and speed for the job, per the Subagents section of the **p3-mode** skill.
 
 Every brief stands alone. A T3 child task gets only the brief, never this conversation. T3 child tasks can write, so each brief must say read-only, inspect only, no writes: no file edits, no git mutations, no writes through any MCP.
 
