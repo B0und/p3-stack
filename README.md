@@ -5,7 +5,7 @@ p3-stack is [pstack](https://github.com/cursor/plugins/tree/main/pstack) rebuilt
 pstack is poteto's answer to AI slop code. It turns an agent into an engineering team: one mode skill that routes to playbooks, principles that ground every decision, and verification strict enough that you can parallelize with confidence. p3-stack keeps that system and rewires the mechanics to T3 Code's primitives:
 
 - **Delegation.** `delegate_task` child agents replace Cursor's Task tool, with per-role providers and models resolved from `orchestrator_capabilities`. Cross-model panels are native.
-- **Worktrees.** `t3_thread_launch` binds a worker to its own worktree and branch. One writer per worktree, enforced by the app instead of by advice.
+- **Worktrees.** `delegate_task` with `isolation: "worktree"` gives a child its own checkout. One writer per worktree, enforced by the app instead of by advice.
 - **Watching.** `watch_pull_request` wakes the thread when checks finish, someone comments, or the branch conflicts. No polling loops.
 - **Scheduling.** `schedule_task` runs audits and overnight cadences even when no turn is active. No `/loop`.
 - **Memory.** `t3_thread_read` and `t3_thread_search` replace mining Cursor transcript files.
@@ -19,7 +19,13 @@ cd p3-stack
 ./install.sh
 ```
 
-`install.sh` links every `skills/*` directory into `~/.agents/skills/`, where T3 Code reads skills. Use `./install.sh --project /path/to/repo` to install into a project's `.agents/skills/` instead.
+`install.sh` links skills into both `~/.agents/skills/` for Codex and `~/.claude/skills/` for Claude. Claude does not discover skills installed only under `.agents/`. For global Claude installs, `CLAUDE_CONFIG_DIR` overrides `~/.claude`.
+
+Use `./install.sh --project /path/to/repo` for project-local links under both `.agents/skills/` and `.claude/skills/`. Select one provider with `--provider codex` or `--provider claude`. Existing files, directories, and links to other sources are preserved and reported as skipped. Re-running the installer leaves correct links unchanged. Keep the checkout in place because the links point into it. Skills become available in a fresh provider session. Claude documents [symlinked skill directories](https://code.claude.com/docs/en/skills#where-skills-live). Its [AGENTS.md support](https://code.claude.com/docs/en/memory#agentsmd) applies to project instructions and does not make `.agents/skills/` a Claude discovery path.
+
+For role configuration, readers use the project root's `p3-models.md`, then `~/.agents/p3-models.md`. This is a data file and works for both providers.
+
+Run `python3 -m unittest discover -s tests -v` to check installation and `python3 scripts/verify-skills.py` to validate skill metadata, references, and T3 portability.
 
 ## Get started
 
@@ -31,13 +37,28 @@ cd p3-stack
 
 `p3-mode` routes every task. Its playbooks: investigation, bug fix, perf issue, hillclimb, runtime forensics, trace forensics, feature, refactoring, prototype, visual parity, authoring a skill, eval, babysit, shipping, autonomous run, orchestrate, autopilot-full, autopilot-stack, session pickup, pause safely, multi-phase plan, worktree cleanup, opening a PR.
 
+The thread that receives `/p3-mode` runs the playbook. It owns the todo list and every `delegate_task` spawn. [`agents/p3-agent.md`](agents/p3-agent.md) wraps the delegates a run spawns. Never delegate the playbook itself to it.
+
 ## Skills
 
-architect, arena, automate-me, benchmark-checklist, blast-radius, bro, correct, create-verification-skill, figure-it-out, how, interrogate, maintain-verification-skill, make-bot-ui, no-comments, p3-help, recall, reflect, setup-p3, show-me-your-work, swarm, tdd, teach, technical-writing, typescript-best-practices, unslop, why.
+architect, arena, automate-me, benchmark-checklist, blast-radius, bro, correct, create-verification-skill, figure-it-out, how, interrogate, in-your-own-words, ketchup, maintain-verification-skill, make-bot-ui, no-comments, p3-help, recall, reflect, setup-p3, sharpen, show-me-your-work, swarm, tdd, teach, technical-writing, typescript-best-practices, unslop, why.
 
 ## Principles
 
 The twenty-four principle skills are indexed inside `p3-mode` and referenced by the other skills by name.
+
+## Staying current with pstack
+
+[`UPSTREAM`](UPSTREAM) pins the pstack commit this repo matches, and [`CHANGES.md`](CHANGES.md) records every sync and every p3-only change.
+
+```bash
+scripts/upstream.sh status   # upstream commits since the pin
+scripts/upstream.sh files    # changed upstream files mapped to p3-stack paths
+scripts/upstream.sh diff     # the upstream diff to port
+scripts/upstream.sh pin      # move the pin once the port is done
+```
+
+Port each diff through the Cursor to T3 Code map in [AGENTS.md](AGENTS.md#syncing-with-upstream-pstack), never by copying upstream files.
 
 ## Credit
 
