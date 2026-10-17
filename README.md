@@ -21,7 +21,7 @@ cd p3-stack
 
 `install.sh` links skills into both `~/.agents/skills/` for Codex and `~/.claude/skills/` for Claude. Claude does not discover skills installed only under `.agents/`. For global Claude installs, `CLAUDE_CONFIG_DIR` overrides `~/.claude`.
 
-Use `./install.sh --project /path/to/repo` for project-local links under both `.agents/skills/` and `.claude/skills/`. Select one provider with `--provider codex` or `--provider claude`. Existing files, directories, and links to other sources are preserved and reported as skipped. Re-running the installer leaves correct links unchanged. Keep the checkout in place because the links point into it. Skills become available in a fresh provider session.
+Use `./install.sh --project /path/to/repo` for project-local links under both `.agents/skills/` and `.claude/skills/`. Select one provider with `--provider codex` or `--provider claude`. Existing files, directories, and links to other sources are preserved and reported as skipped. Re-running the installer leaves correct links unchanged. Keep the checkout in place because the links point into it. Skills become available in a fresh provider session. Claude documents [symlinked skill directories](https://code.claude.com/docs/en/skills#where-skills-live). Its [AGENTS.md support](https://code.claude.com/docs/en/memory#agentsmd) applies to project instructions and does not make `.agents/skills/` a Claude discovery path.
 
 For role configuration, readers use the project root's `p3-models.md`, then `~/.agents/p3-models.md`. This is a data file and works for both providers.
 
