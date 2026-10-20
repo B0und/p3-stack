@@ -8,6 +8,25 @@ Issue #2 is fixed locally. The installer defaults to both provider paths, suppor
 
 T3 child worktrees now use `delegate_task` with `isolation: "worktree"`. Separate top-level threads require an explicit user request. The skill verifier checks metadata, links, configuration fallback, and unported Cursor mechanisms.
 
+## 2026-10-21: sync pstack 0.15.25 to 0.15.29
+
+Upstream range `09d06eb..111cf6a` (cursor/plugins, `pstack/`), pinned to the current cursor/plugins main commit.
+
+### Ported
+
+- **New skills `create-formal-verification-skill` and `maintain-formal-verification-skill`** (4382e68, 7b353f7, 6b78e9f). Create verifies one property where a bug costs the most and tests reach the least, with TLA+ as the default for an ordering question and a generated-inputs fallback when no verifier runs on the language. Maintain diffs covered code since the recorded sync commit, updates the model or properties from the code, reruns, and judges each failure as drift or a bug. Both are tool-neutral, so they port unchanged.
+- **`setup-p3` step 8** (f9be7aa): offer once to generate a formal verification skill, as step 7 already does for a verification skill. **`p3-help`** gains the matching discovery check and two rows, plus the offer in its setup steps.
+- **`sharpen` returns to the original prompt rewrite** (75fabac, 88d4751). It names what a top professional would add, their raw material, their methods, and an outside check, then hands back the rewritten prompt instead of doing the task. `p3-help` and `recipes.md` carry the new wording.
+- **`ketchup` lists every waiting item and never cuts to fit a word count** (16541c6, bc14437). One call can cover many items, each item carries its link, user impact, evidence, risk, and pick, and the reply grows with the item count. The happened summary drops under 100 words. Visual guidance moves to one place and rules out drawing action items. T3 state reads stay: `list_thread_pull_requests`, `task_status`, `t3_thread_read`, `html_preview` plus `html_render`.
+- **`typescript-best-practices`** (0317eb8): a brand comes from a verifying type guard, never from `as`, in both the rule table and `references/patterns.md`.
+
+### Skipped
+
+- **Claude Code adapter** (#705). p3 replaces harness adapters and role rules with live provider discovery through `orchestrator_capabilities` plus `p3-models.md`, so there is no `~/.claude/rules` file to write and no Cursor-only feature table to translate. The installer already handles both provider directories.
+- **Guide refresh and its docs-vs-tree check** (019a6a2). p3 ships no `docs/guide`; `scripts/verify-skills.py` already checks the tree that p3 does ship.
+- **`make-bot-ui` and `poteto-mode` name fixes** (a968159). p3 names every skill after its folder already; the `poteto-mode` fix has no p3 equivalent.
+- Cursor plugin manifests, marketplace assets, and version bumps.
+
 ## 2026-10-17: sync pstack 0.15.20 to 0.15.25
 
 Built on [PR #8](https://github.com/uzairansaruzi/p3-stack/pull/8), preserving its earlier 0.15.10 to 0.15.20 port. Upstream range `1b6d44f..09d06eb`, pinned to the current cursor/plugins main commit.
