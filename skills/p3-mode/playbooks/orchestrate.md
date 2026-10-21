@@ -15,6 +15,8 @@ Three rules carry the rest.
 - Every spawn and every resume carries the standing orders verbatim.
 - The brief is the product. A vague brief fails quietly, because a worker cannot ask you a question.
 
+**Start guarded.** The coordinator session's first message carries `P3_ROLE=coordinator`; start a program with `/p3-mode coordinator P3_ROLE=coordinator`. The `p3-coordinator-guard` extension activates on that marker and blocks work tools in favor of delegation. Forking another thread and setting a non-worker project default are also blocked. Worker briefs never carry it.
+
 #### Roles and placement
 
 - **Coordinator (this thread).** Frames, authors briefs, drains the inbox, owns the human report, makes judgment calls. It never authors or edits code. Conflicted merges, restacks, and code changes are always tasks. Mechanically landing a verified unit (fast-forward or clean cherry-pick of a worker's commit, then push) is bookkeeping the coordinator may do itself on repos where local git is cheap. Queueing finished work behind an idle stacker is how a deadline harvests nothing. Workers are spawned with `delegate_task` (`mode: "async"`) and drained with `task_status`. A worker that needs a separate checkout uses `delegate_task` with `isolation: "worktree"`, drained with `task_status`. The coordinator reads and writes the store files at drain points. Nothing in the store spawns, waits, or wakes anything.
@@ -37,6 +39,8 @@ Create `orchestrate/<project-slug>/` in the current project. Every file has exac
 - `status.md` is derived from `units.tsv` and `ledger.tsv` at each drain, never hand-maintained. Regenerate it from the tables instead of narrating events into it.
 
 #### The brief
+
+The coordinator session's own brief starts with `/p3-mode coordinator P3_ROLE=coordinator`; the worker brief template below never carries the marker.
 
 Your prompts to agents are your only product, and a sloppy brief compounds into slop across the whole tree. Every spawn carries all of it. A field you cannot fill is a unit you have not scoped yet.
 

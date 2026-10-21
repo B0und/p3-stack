@@ -30,7 +30,7 @@ Run `python3 -m unittest discover -s tests -v` to check installation and `python
 ## Get started
 
 1. Run `/setup-p3`. It reads `orchestrator_capabilities` and writes `p3-models.md`, mapping each role (code, judgment, the review panels) to a provider and model you actually have.
-2. Use `/p3-mode` whenever you want rigorous work. It reads the request, picks a playbook, and runs the other skills as the steps need them.
+2. Use `/p3-mode` whenever you want rigorous work. It reads the request, picks a playbook, and runs the other skills as the steps need them. Start a standing program with `/p3-mode coordinator P3_ROLE=coordinator` so the coordinator guard activates.
 3. Stuck or unsure which skill fits? Ask `/p3-help`.
 
 ## The mode
