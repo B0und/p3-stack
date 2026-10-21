@@ -10,6 +10,8 @@ The Orchestrate Frame step sizes a program by units, expected stacks and what on
 
 A user-level `p3-coordinator-guard` pi extension enforces the coordinator tool policy. It activates only when the first user message starts with `P3_ROLE=coordinator` or `/p3-mode coordinator`, allows delegation and orchestration tools plus the `orchestrate/**` store, and blocks work commands plus non-policy delegate, launch, configure, `create_threads`, fork, and project-default targets. A fork is allowed only from the current worker thread when `threadId` is omitted, because another thread's model cannot be read synchronously. A project default is allowed only when it is absent or names the worker model. `P3_COORDINATOR_GUARD=0` disables it. The p3-mode skill and Orchestrate playbook document the allowlist and the startup marker.
 
+A user-level `kararen-no-sleep-guard` pi extension blocks `sleep` commands in `bash` calls from KaraRen checkouts and worktrees, including wrapped, separated, `sh -c` and wait-loop forms, while allowing files, tests and searches that only contain the word; `KARAREN_NO_SLEEP_GUARD=0` disables it.
+
 Issue #2 is fixed locally. The installer defaults to both provider paths, supports provider selection and `CLAUDE_CONFIG_DIR`, and preserves existing user-owned skills and foreign links. Skill creation and discovery use the active provider directory. Model readers check project configuration before the global fallback. Installer tests cover both providers and repeated installs.
 
 T3 child worktrees now use `delegate_task` with `isolation: "worktree"`. Separate top-level threads require an explicit user request. The skill verifier checks metadata, links, configuration fallback, and unported Cursor mechanisms.
