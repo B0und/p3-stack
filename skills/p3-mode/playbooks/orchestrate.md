@@ -51,7 +51,9 @@ CONTEXT      pointers to files and PRs; upstream reports pasted in full when thi
              depends on them, because workers cannot see siblings
 ACCEPTANCE   checkable criteria, one per line
 VERIFY       exact commands or the preview/device path, plus known gotchas
-TIMEBOX      rough cap on runtime; on expiry, return partial findings and stop rather than run on
+DONE WHEN    the VERIFY commands exit 0 and the output shows every ACCEPTANCE line met
+BLOCKED      return what you have with the blocker and its evidence, then stop rather than
+             widen scope or guess
 FORBIDDEN    no rebase, no force-push, no fixes outside scope, plus unit-specific bans
 REPORT       status, branch, head SHA, PRs, verdict, what you actually ran, deviations,
              suggested follow-ups
