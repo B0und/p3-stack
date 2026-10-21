@@ -12,6 +12,8 @@ A user-level `p3-coordinator-guard` pi extension enforces the coordinator tool p
 
 A user-level `kararen-no-sleep-guard` pi extension blocks `sleep` commands in `bash` calls from KaraRen checkouts and worktrees, including wrapped, separated, `sh -c` and wait-loop forms, while allowing files, tests and searches that only contain the word; `KARAREN_NO_SLEEP_GUARD=0` disables it.
 
+A worker twice removed the owner's `/tmp/.X11-unix/X0` with a display probe, then symlinked `X0` to `X0_` instead of reporting it. A user-level `kararen-display-guard` pi extension blocks `xvfb-run` without an explicit server number of 90 or above, `xvfb-run -a`, `-d` and `--auto-servernum`, `Xvfb` displays below 90, `-displayfd` and a no-display `Xvfb`, plus deletes, moves, links, truncations and write redirects of `/tmp/.X*-lock` and `/tmp/.X11-unix`. It allows reads and unrelated paths, activates only in `/home/unbound/Projects/KaraRen` and `/home/unbound/.t3/worktrees/KaraRen/`, and `KARAREN_DISPLAY_GUARD=0` disables it.
+
 Issue #2 is fixed locally. The installer defaults to both provider paths, supports provider selection and `CLAUDE_CONFIG_DIR`, and preserves existing user-owned skills and foreign links. Skill creation and discovery use the active provider directory. Model readers check project configuration before the global fallback. Installer tests cover both providers and repeated installs.
 
 T3 child worktrees now use `delegate_task` with `isolation: "worktree"`. Separate top-level threads require an explicit user request. The skill verifier checks metadata, links, configuration fallback, and unported Cursor mechanisms.
