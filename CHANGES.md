@@ -4,7 +4,7 @@ Every pstack sync and every p3-only change, newest first. `UPSTREAM` holds the p
 
 ## Unreleased
 
-Finite queues use Autopilot-full with one parent-bound two-minute watchdog, completion-event reconciliation, durable task ownership, a pilot before parallel work, and two implementation owners by default. Routine work uses one designated isolated app verifier and one independent reviewer. Recovery confirms the old owner is stopped. Current user model restrictions override role defaults for the run. Orchestrate shares this contract for evolving programs. The router points to KaraRen's repository-owned Pi guards and distinguishes their enforcement from Codex execution.
+Finite queues use Autopilot-full with one parent-bound two-minute watchdog, completion-event reconciliation, durable task ownership, a pilot before parallel work, and two implementation owners by default. Routine work uses one designated isolated app verifier and one independent reviewer. Recovery confirms the old owner is stopped. A durable pause state prevents scheduler input from resuming work until the operator explicitly resumes. Current user model restrictions override role defaults for the run. Orchestrate shares this contract for evolving programs. The router points to KaraRen's repository-owned Pi guards and distinguishes their enforcement from Codex execution.
 
 Delegated worker briefs carry a `DONE WHEN` completion condition and a `BLOCKED` line instead of a `TIMEBOX` runtime cap. A unit ends when its VERIFY commands pass or its worker reports a blocker, never on a clock.
 
