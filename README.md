@@ -31,7 +31,7 @@ Run `python3 -m unittest discover -s tests -v` to check installation and `python
 
 1. Run `/setup-p3`. It reads `orchestrator_capabilities` and writes `p3-models.md`, mapping each role (code, judgment, the review panels) to a provider and model you actually have.
 2. Use `/p3-mode` whenever you want rigorous work. It reads the request, picks a playbook, and runs the other skills as the steps need them. Start a standing program with `/p3-mode coordinator P3_ROLE=coordinator` so the coordinator guard activates.
-3. For several features, open one thread in the target repository and send the prompt below. The parent starts its bound two-minute watchdog; you do not create a second cron thread. It proves the first unit before parallel work and consumes child completion events between watchdog ticks.
+3. For several features, open one thread in the target repository and send the prompt below. The parent proves the first unit before parallel work and advances on child and PR events. Requested task queues need no cron thread. Keep GitHub issue polling in a separate controller thread.
 4. Stuck or unsure which skill fits? Ask `/p3-help`.
 
 ```text
@@ -39,7 +39,7 @@ Run `python3 -m unittest discover -s tests -v` to check installation and `python
 Implement feature one, feature two, and feature three. Run this finite queue through reviewed, verified PRs and merge them. Use only the Codex Sol and Luna models for this run. Follow this repository's verification skill. Keep unrelated improvements in a backlog.
 ```
 
-Expect an initial queue and the watchdog's cadence and next run time. Each finished unit needs a real verification receipt and an independent review. A worktree isolates files, so live app work uses one designated isolated verifier. To retain merge control, replace the merge instruction with `build a reviewed stack; I will land it`.
+Expect one initial acknowledgement, batched milestone or blocker updates, and a final result. Routine transitions stay in the ledger. Each finished unit needs a real verification receipt and an independent review. A worktree isolates files, so live app work uses one designated isolated verifier. To retain merge control, replace the merge instruction with `build a reviewed stack; I will land it`.
 
 ## The mode
 
