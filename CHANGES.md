@@ -4,20 +4,6 @@ Every pstack sync and every p3-only change, newest first. `UPSTREAM` holds the p
 
 ## Unreleased
 
-Requested task queues now advance on child completion and PR events without a recurring watchdog. A separately requested GitHub issue intake may poll in its own thread. The shared event protocol requires a live wake source or explicit blocker before yielding and deduplicates public progress reports. Routine transitions stay in the ledger; the parent reports actionable changes, completed batches, and final results. This supersedes the earlier mandatory two-minute watchdog. The native PR watcher still polls GitHub internally.
-
-Finite queues retain a verified pilot, bounded implementation owners, one isolated app verifier, current-head review receipts, stopped-owner recovery, durable pause state, and current user model overrides.
-
-Delegated worker briefs carry a `DONE WHEN` completion condition and a `BLOCKED` line instead of a `TIMEBOX` runtime cap. A unit ends when its VERIFY commands pass or its worker reports a blocker, never on a clock.
-
-The Orchestrate Frame step sizes a program by units, expected stacks and what one agent could carry alone, and lands verified units as they arrive instead of reserving a share of a wall-clock budget. The p3-help away-mode prompt and recipe give a blocked exit instead of one measured in hours.
-
-A user-level `p3-coordinator-guard` pi extension enforces the coordinator tool policy. It activates only when the first user message starts with `P3_ROLE=coordinator` or `/p3-mode coordinator`, allows delegation and orchestration tools plus the `orchestrate/**` store, and blocks work commands plus non-policy delegate, launch, configure, `create_threads`, fork, and project-default targets. A fork is allowed only from the current worker thread when `threadId` is omitted, because another thread's model cannot be read synchronously. A project default is allowed only when it is absent or names the worker model. `P3_COORDINATOR_GUARD=0` disables it. The p3-mode skill and Orchestrate playbook document the allowlist and the startup marker.
-
-KaraRen owns the `kararen-no-wait-guard` Pi extension, installed with `bun run guard:install` and checked by doctor. Use T3 completion events and `task_status` rather than shell wait wrappers.
-
-A worker twice removed the owner's `/tmp/.X11-unix/X0` with a display probe, then symlinked `X0` to `X0_` instead of reporting it. A user-level `kararen-display-guard` pi extension blocks `xvfb-run` without an explicit server number of 90 or above, `xvfb-run -a`, `-d` and `--auto-servernum`, `Xvfb` displays below 90, `-displayfd` and a no-display `Xvfb`, plus deletes, moves, links, truncations and write redirects of `/tmp/.X*-lock` and `/tmp/.X11-unix`. It allows reads and unrelated paths, activates only in `/home/unbound/Projects/KaraRen` and `/home/unbound/.t3/worktrees/KaraRen/`, and `KARAREN_DISPLAY_GUARD=0` disables it.
-
 Issue #2 is fixed locally. The installer defaults to both provider paths, supports provider selection and `CLAUDE_CONFIG_DIR`, and preserves existing user-owned skills and foreign links. Skill creation and discovery use the active provider directory. Model readers check project configuration before the global fallback. Installer tests cover both providers and repeated installs.
 
 T3 child worktrees now use `delegate_task` with `isolation: "worktree"`. Separate top-level threads require an explicit user request. The skill verifier checks metadata, links, configuration fallback, and unported Cursor mechanisms.
