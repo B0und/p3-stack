@@ -42,10 +42,11 @@ Swap in the real paths, skills, and done checks. Informal wording works.
 
 ## Away and back
 
-- `/p3-mode im going to bed. <goal> in a fresh worktree off <base>. done means <checks>. keep a decision log. don't ask me before committing. run until done. if you're blocked on something only i can answer, stop and write up why.`
+- `/p3-mode im going to bed. <goal> in a fresh worktree off <base>. done means <checks>. keep a decision log. don't ask me before committing. run until done. if you're truly stuck after a few hours, stop and write up why.`
 - `/show-me-your-work catch me up on what you did last night.` Read its Attention section first.
 - `/ketchup` catches you up on this thread since your last message and lists every call that waits on you.
 - `/p3-mode full autopilot on this queue. each item is independent.`
 - `/p3-mode autopilot these changes but stack them, don't ship. i'll land the stack.`
+- `/p3-mode set up the GitHub loop here: labelled issues and my task batches become one worker each, every PR head gets an automatic review, workers merge on a clear review.`
 - `/reflect capture what we learned so the next run doesn't repeat it.` Approve only edits that change a future decision.
 - `/bro` restates the last reply in plain words.

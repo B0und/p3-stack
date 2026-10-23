@@ -42,7 +42,7 @@ A prompt states the intent and the check for done. The playbook supplies the ste
 - Ask for a fresh worktree off a named base.
 - Pre-answer what the agent would stop for, such as "don't ask me before committing".
 - Ask for a decision log to audit later.
-- Give an exit: "if you're blocked on something only i can answer, stop and write up why".
+- Give an exit: "if you're truly stuck after a few hours, stop and write up why".
 
 ## Steer in one line
 
