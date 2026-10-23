@@ -35,7 +35,7 @@ Run `python3 -m unittest discover -s tests -v` to check installation and `python
 
 ## The mode
 
-`p3-mode` routes every task. Its playbooks: investigation, bug fix, perf issue, hillclimb, runtime forensics, trace forensics, feature, refactoring, prototype, visual parity, authoring a skill, eval, babysit, shipping, autonomous run, orchestrate, autopilot-full, autopilot-stack, session pickup, pause safely, multi-phase plan, worktree cleanup, opening a PR.
+`p3-mode` routes every task. Its playbooks: investigation, bug fix, perf issue, hillclimb, runtime forensics, trace forensics, feature, refactoring, prototype, visual parity, authoring a skill, eval, babysit, shipping, autonomous run, orchestrate, autopilot-full, autopilot-stack, GitHub loop, session pickup, pause safely, multi-phase plan, worktree cleanup, opening a PR.
 
 The thread that receives `/p3-mode` runs the playbook. It owns the todo list and every `delegate_task` spawn. [`agents/p3-agent.md`](agents/p3-agent.md) wraps the delegates a run spawns. Never delegate the playbook itself to it.
 

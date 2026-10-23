@@ -4,6 +4,10 @@ Every pstack sync and every p3-only change, newest first. `UPSTREAM` holds the p
 
 ## Unreleased
 
+Add the GitHub loop playbook and its review workflow template (`references/github-loop-review.yml`). Owner-labelled issues and the operator's task batches each get one top-level worker thread that keeps its conversation from reproduction to merge and starts no agents. A repository workflow posts every candidate head and every worker dispute to a webhook that opens a fresh reviewer thread; the reviewer publishes a head-bound review comment and commit status and sends the verdict to the worker named in the PR. The worker's judgment is stronger in disputes, and it merges on a clear review of its current head. The p3-mode router lists the playbook and names it as the one exception to fresh delegates.
+
+Remove the KaraRen-specific edits that agents added after the 0.15.29 sync: the coordinator guard policy, the status-board command, the KaraRen no-wait and display guard notes, the mandatory app verifier and event ledger, and the rewritten Orchestrate playbook. Those rules belong to the KaraRen repository.
+
 Issue #2 is fixed locally. The installer defaults to both provider paths, supports provider selection and `CLAUDE_CONFIG_DIR`, and preserves existing user-owned skills and foreign links. Skill creation and discovery use the active provider directory. Model readers check project configuration before the global fallback. Installer tests cover both providers and repeated installs.
 
 T3 child worktrees now use `delegate_task` with `isolation: "worktree"`. Separate top-level threads require an explicit user request. The skill verifier checks metadata, links, configuration fallback, and unported Cursor mechanisms.

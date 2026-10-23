@@ -47,5 +47,6 @@ Swap in the real paths, skills, and done checks. Informal wording works.
 - `/ketchup` catches you up on this thread since your last message and lists every call that waits on you.
 - `/p3-mode full autopilot on this queue. each item is independent.`
 - `/p3-mode autopilot these changes but stack them, don't ship. i'll land the stack.`
+- `/p3-mode set up the GitHub loop here: labelled issues and my task batches become one worker each, every PR head gets an automatic review, workers merge on a clear review.`
 - `/reflect capture what we learned so the next run doesn't repeat it.` Approve only edits that change a future decision.
 - `/bro` restates the last reply in plain words.
