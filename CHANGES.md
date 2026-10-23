@@ -4,7 +4,9 @@ Every pstack sync and every p3-only change, newest first. `UPSTREAM` holds the p
 
 ## Unreleased
 
-Finite queues use Autopilot-full with one parent-bound two-minute watchdog, completion-event reconciliation, durable task ownership, a pilot before parallel work, and two implementation owners by default. Routine work uses one designated isolated app verifier and one independent reviewer. Recovery confirms the old owner is stopped. A durable pause state prevents scheduler input from resuming work until the operator explicitly resumes. Current user model restrictions override role defaults for the run. Orchestrate shares this contract for evolving programs. The router points to KaraRen's repository-owned Pi guards and distinguishes their enforcement from Codex execution.
+Requested task queues now advance on child completion and PR events without a recurring watchdog. A separately requested GitHub issue intake may poll in its own thread. The shared event protocol requires a live wake source or explicit blocker before yielding and deduplicates public progress reports. Routine transitions stay in the ledger; the parent reports actionable changes, completed batches, and final results. This supersedes the earlier mandatory two-minute watchdog. The native PR watcher still polls GitHub internally.
+
+Finite queues retain a verified pilot, bounded implementation owners, one isolated app verifier, current-head review receipts, stopped-owner recovery, durable pause state, and current user model overrides.
 
 Delegated worker briefs carry a `DONE WHEN` completion condition and a `BLOCKED` line instead of a `TIMEBOX` runtime cap. A unit ends when its VERIFY commands pass or its worker reports a blocker, never on a clock.
 
