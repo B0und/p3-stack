@@ -4,6 +4,8 @@ Every pstack sync and every p3-only change, newest first. `UPSTREAM` holds the p
 
 ## Unreleased
 
+The GitHub loop says how a worker runs Bug fix, Feature and Opening a PR without spawning: every delegated or panel step runs inline. It records that the worker verifies its own change, trading Shipping's independent verdict for a faster fix loop. Workers per machine are counted across controllers, agent-launched threads stay on the launcher's machine, and operator-started controllers spread work through load balancing. The reviewer may be one persistent thread when the harness cannot provision a fresh thread per delivery.
+
 The GitHub loop worker babysits its own PR in `drive` mode once it opens it, so failing CI, conflicts and review threads are handled by the Babysit playbook's existing rules. The worker owns its branch as an Autopilot-full owner does, and merges only when the review is clear on its current head and Babysit reports the PR merge-ready.
 
 Add the GitHub loop playbook and its review workflow template (`references/github-loop-review.yml`). Owner-labelled issues and the operator's task batches each get one top-level worker thread that keeps its conversation from reproduction to merge and starts no agents. A repository workflow posts every candidate head and every worker dispute to a webhook that opens a fresh reviewer thread; the reviewer publishes a head-bound review comment and commit status and sends the verdict to the worker named in the PR. The worker's judgment is stronger in disputes, and it merges on a clear review of its current head. The p3-mode router lists the playbook and names it as the one exception to fresh delegates.
