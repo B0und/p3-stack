@@ -8,6 +8,19 @@ Issue #2 is fixed locally. The installer defaults to both provider paths, suppor
 
 T3 child worktrees now use `delegate_task` with `isolation: "worktree"`. Separate top-level threads require an explicit user request. The skill verifier checks metadata, links, configuration fallback, and unported Cursor mechanisms.
 
+## 2026-10-23: sync pstack 0.15.29 to 0.15.30
+
+Upstream range `111cf6a..8b3326d` (cursor/plugins, `pstack/`).
+
+### Ported
+
+- Add the `statechart` skill and its scripts unchanged. It draws what the user sees as a Mermaid statechart generated from a TLA+ model, turns an agreed chart into a TLA+ skeleton, and audits code against an existing spec. It has no Cursor mechanism to replace.
+- List `/statechart` in the README skill list and the `p3-help` table.
+
+### Skipped
+
+- `.cursor-plugin/plugin.json`, `plugin.json` and `docs/guide/06-verify-and-ship.md` are Cursor-only.
+
 ## 2026-10-21: sync pstack 0.15.25 to 0.15.29
 
 Upstream range `09d06eb..111cf6a` (cursor/plugins, `pstack/`), pinned to the current cursor/plugins main commit.
